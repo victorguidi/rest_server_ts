@@ -1,0 +1,16 @@
+version: '3'
+services:
+  server:
+    container_name: server_v1
+    restart: "no"
+    image: server_v1
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports: 
+      - 5000:5000
+    networks:
+      - app-network
+networks:
+  app-network:
+    driver: bridge

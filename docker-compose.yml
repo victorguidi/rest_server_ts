@@ -2,15 +2,23 @@ version: '3'
 services:
   server:
     container_name: server_v1
-    restart: "no"
     image: server_v1
     build:
       context: .
       dockerfile: Dockerfile
+    depends_on:
+      - db
     ports: 
       - 5000:5000
-    networks:
-      - app-network
-networks:
-  app-network:
-    driver: bridge
+    env_file:
+      - ./server/.env
+  db:
+    container_name: pg
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      PGDATA: ${DB_DATA}
+    volumes:
+      - /home/victorguidi/dbs/postgres:/pgdata
+    ports:
+      - 5432:5432

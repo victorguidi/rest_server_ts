@@ -1,5 +1,7 @@
-import { Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { compareHash } from 'src/utils/compareHash.utils';
+import { passHash } from 'src/utils/hash.utils';
 import { UsersService } from './users.service';
 
 @Controller('users')
@@ -13,14 +15,18 @@ export class UsersController {
     return this.userService.findAll()
   }
 
-  // Controller for creating a user
   @UseGuards(JwtAuthGuard)
   @Get(':user')
   getUser(@Param() params) {
     return this.userService.findByUser(params.user)
   }
 
-
+  // Controller for creating a user
+  @Post()
+  async createUser(@Body() user: any) {
+    let hash = await passHash(user.password);
+    return this.userService.createUser(user.username, hash)
+  }
 
   // Controller for deleting a user
 

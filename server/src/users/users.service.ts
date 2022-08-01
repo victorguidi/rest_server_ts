@@ -21,6 +21,10 @@ export class UsersService {
     return this.userCredentialRepository.createQueryBuilder("usercredentials").where("userCredentials.username = :username", { username: user }).getOne()
   }
 
+  createUser(user: string, pass: string) {
+    return this.userCredentialRepository.insert({ username: user, password: pass })
+  }
+
   async remove(id: number): Promise<void> {
     await this.userCredentialRepository.delete(id)
   }

@@ -1,4 +1,5 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { UsersService } from './users.service';
 
 @Controller('users')
@@ -13,6 +14,11 @@ export class UsersController {
   }
 
   // Controller for creating a user
+  @UseGuards(JwtAuthGuard)
+  @Get(':user')
+  getUser(@Param() params) {
+    return this.userService.findByUser(params.user)
+  }
 
 
 

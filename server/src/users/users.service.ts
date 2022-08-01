@@ -17,7 +17,13 @@ export class UsersService {
     return this.userCredentialRepository.findOneBy({ id });
   }
 
+  findByUser(user: string): Promise<Usercredentials | undefined> {
+    return this.userCredentialRepository.createQueryBuilder("usercredentials").where("userCredentials.username = :username", { username: user }).getOne()
+  }
+
   async remove(id: number): Promise<void> {
     await this.userCredentialRepository.delete(id)
   }
 }
+
+// TODO: Encrypt data from users in the DB

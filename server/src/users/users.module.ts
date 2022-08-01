@@ -9,6 +9,6 @@ import { Usercredentials } from 'src/database/entities/usercredential.entity';
     TypeOrmModule.forFeature([Usercredentials])
   ],
   providers: [UsersService],
-  controllers: [UsersController]
+  controllers: [UsersController],
 })
 export class UsersModule { }

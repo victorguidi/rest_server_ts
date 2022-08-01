@@ -15,7 +15,7 @@ import { ConfigModule } from '@nestjs/config';
     AccountsModule,
     ConfigModule.forRoot({
       isGlobal: true
-    })
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],

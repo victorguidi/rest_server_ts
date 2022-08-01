@@ -23,6 +23,5 @@ import { Usercredentials } from './entities/usercredential.entity';
     })
   ],
   providers: [DatabaseService]
-
 })
 export class DatabaseModule { }

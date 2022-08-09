@@ -12,7 +12,8 @@ export class AccountsController {
 
 
 
-  //Controller for accessing account informartion
+  //Controller for accessing account informartion 
+
 
 
 
